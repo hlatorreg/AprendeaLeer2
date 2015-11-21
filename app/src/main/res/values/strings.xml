@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">AprendeaLeer2</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="Jugar">Jugar</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_game_menu">GameMenu</string>
+    <string name="title_activity_modulo_padres">ModuloPadres</string>
+    <string name="repetir">Repetir</string>
+    <string name="Puntaje">" =       0"</string>
+    <string name="desLib">Felicitaciones, superaste el nivel Acciones!</string>
+    <string name="desAcc">Felicitaciones, superaste el nivel Cosas!</string>
+    <string name="desCos">Felicitaciones, superaste el nivel Cuerpo!</string>
+    <!-- Error messages -->
+    <string name="video_error_media_load_timeout">Media loading timed out</string>
+    <string name="video_error_server_inaccessible">Media server was not reachable</string>
+    <string name="video_error_unknown_error">Failed to load video</string>
+    <string name="error_fragment_message">An error occurred</string>
+    <string name="dismiss_error">Dismiss</string>
+    <string name="oops">Oops</string>
+    <string name="title_activity_modulo_cuerpo">ModuloCuerpo</string>
+    <string name="title_activity_modulo_cuerpo_game">moduloCuerpoGame</string>
+    <string name="title_activity_modulo_cosas1">ModuloCosas1</string>
+    <string name="title_activity_modulo_cosas2">ModuloCosas2</string>
+    
+    <!-- Menu Principal -->
+    
+    <string name="Padres">Padres</string>
+    <string name="Cuerpo">Cuerpo</string>
+    <string name="Cosas">Cosas</string>
+    <string name="Acciones">Acciones</string>
+
+    <!--Modulo Informacion -->
+
+    <string name="Informacion">Información</string>
+    <string name="TextoInformacion">Esta aplicacion esta destinada a niños desde los 2 a 5 años de edad, esto solo
+                                    es una recomendacion, si lo desea puede emplearla desde el año en adelante.
+
+                                    La aplicacion esta basada en la metodologia Gleen-Doman para enseñar a leer a niños,
+                                    se recomienda la supervision de un adulto.</string>
+
+    <!--Modulo Padres -->
+
+    <string name="papa">papá</string>
+    <string name="mama">mamá</string>
+
+    <!-- Modulo Cuerpo -->
+
+    <string-array name="cuerpoArray">
+        <item>boca</item>
+        <item>cara</item>
+        <item>ceja</item>
+        <item>codo</item>
+        <item>cuello</item>.
+        <item>dedo</item>
+        <item>espalda</item>
+        <item>mano</item>
+        <item>nariz</item>
+        <item>ojos</item>
+        <item>oreja</item>
+        <item>pelo</item>
+        <item>pie</item>
+        <item>rodilla</item>
+    </string-array>
+
+    <!-- Modulo Cosas -->
+
+    <string-array name="cosasArray">
+        <item>cama</item>
+        <item>silla</item>
+        <item>baño</item>
+        <item>escoba</item>
+        <item>televisor</item>
+        <item>perro</item>
+        <item>gato</item>
+        <item>mesa</item>
+        <item>pared</item>
+        <item>reloj</item>
+        <item>puerta</item>
+        <item>refrigerador</item>
+        <item>alfombra</item>
+        <item>ventana</item>
+        <item>plato</item>
+        <item>pijama</item>
+        <item>cuchara</item>
+        <item>zapato</item>
+        <item>taza</item>
+        <item>pelota</item>
+    </string-array>
+
+    <!-- Modulo Acciones -->
+
+    <string-array name="accionesArray">
+        <item>beber</item>
+        <item>comer</item>
+        <item>correr</item>
+        <item>dormir</item>
+        <item>leer</item>
+        <item>llorar</item>
+        <item>reir</item>
+        <item>saltar</item>
+        <item>sentarse</item>
+    </string-array>
+
+
+    <!-- Modulo Libro -->
+
+    <string name="libro">
+        Erase una familia / extraordinaria  con dos hijos, /Pablo y Clara, /que estaba muy unida/a la naturaleza. /Tal era su afición, /que cuidaban /a los animales /y a las plantas /como si de /su propia familia /se tratara./
+        Una mañana /se encontraron que /unas de las patas, /llamada Mafalda, /había desaparecido. /Buscaron por todas /partes ,pero /no la encontraron. /
+        Iván , el primo /de Pablo y Clara /,dijo /¿y porqué no miramos en la leña?/
+        ¡Es verdad ! /,dijo su padre. /
+        Todos se dirigieron /al leñero  y allí /estaba Mafalda, /con 25 huevos. /
+        Al cabo  de /treinta días unos /precisos patitos /blancos nacieron.  /Y Pablo y Clara /los cuidaron mucho. /
+        Cuando los patitos /ya no necesitaban /de los cuidados de /su mamá, ni de /los niños, Pablo /regaló  a cada /uno de sus compañeros /de segundo un pato, /para que disfrutarán /de su compañía y /aprendieran a amar a /la naturaleza como /él lo hacía.
+    </string>
+
+    <string name="title_activity_modulo_opciones">ModuloOpciones</string>
+    <string name="title_activity_modulo_informacion">ModuloInformacion</string>
+    <string name="title_activity_modulo_cosas_game">ModuloCosasGame</string>
+    <string name="title_activity_modulo_acciones">ModuloAcciones</string>
+    <string name="title_activity_modulo_acciones_game">ModuloAccionesGame</string>
+    <string name="title_activity_modulo_libro">ModuloLibro</string>
+
+</resources>

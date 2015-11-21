@@ -1,0 +1,163 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="1"
+    android:background="@drawable/image_bg_game"
+    tools:context="com.example.meriadok.aprendealeer2.moduloAccionesGame">
+
+    <LinearLayout
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp">
+
+        <View
+            android:layout_weight="2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/star"
+            android:src="@drawable/star"
+            android:background="@android:color/transparent"
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/puntaje"
+            android:text="@string/Puntaje"
+            android:layout_width="108dp"
+            android:layout_height="20dp" />
+
+    </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/juegoAcciones"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.9">
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/imagenAccionesJuego"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:src="@drawable/placeholder" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layoutJuego"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <com.example.meriadok.aprendealeer2.AutoResizeTextView
+                    android:id="@+id/opcion1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="opcion 1"
+                    android:textColor="#FF0000"
+                    android:textSize="80sp" />
+
+                <ImageView
+                    android:id="@+id/resOpcion"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <com.example.meriadok.aprendealeer2.AutoResizeTextView
+                    android:id="@+id/opcion2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="opción 2"
+                    android:textColor="#FF0000"
+                    android:textSize="80sp" />
+
+                <ImageView
+                    android:id="@+id/resOpcion2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <com.example.meriadok.aprendealeer2.AutoResizeTextView
+                    android:id="@+id/opcion3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="opcion 3"
+                    android:textColor="#FF0000"
+                    android:textSize="80sp" />
+
+                <ImageView
+                    android:id="@+id/resOpcion3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ImageView
+                android:id="@+id/animacionEstrella"
+                android:src="@drawable/animation_stars"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/textoFelicitaciones"
+                android:text="@string/desLib"
+                android:textSize="40sp"
+                android:textColor="#FF0000"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+
+    </ViewFlipper>
+
+</LinearLayout>

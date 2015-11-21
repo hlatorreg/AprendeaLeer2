@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/image_bg"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <com.example.meriadok.aprendealeer2.AutoResizeTextViewSunn
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="elija un alumno"
+        android:id="@+id/tituloElejir"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="#fea" />
+
+    <ListView
+        style="@style/CodeFont"
+        android:textColor="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/listaAlumnos"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp">
+
+        <info.hoang8f.widget.FButton
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            fbutton:buttonColor="#d93649"
+            android:text="Cancelar"
+            android:id="@+id/botonCancelar" />
+
+        <View
+            android:layout_width="20sp"
+            android:layout_height="fill_parent"/>
+
+        <info.hoang8f.widget.FButton
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            fbutton:buttonColor="#1abc9c"
+            android:text="Aceptar"
+            android:id="@+id/botonAceptarCambiar" />
+
+    </LinearLayout>
+
+</LinearLayout>

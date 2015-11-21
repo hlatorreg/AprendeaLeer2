@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/image_bg">
+
+    <ViewFlipper
+        android:id="@+id/flippOpciones"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:weightSum="8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingrese su correo electronico:"
+                android:textSize="30sp"
+                android:layout_gravity="center"
+                android:textColor="#fea"
+                android:padding="20dp"
+                />
+
+            <EditText
+                android:typeface="monospace"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/editMail"
+                android:layout_weight="0.8"
+                android:background="#ffffff"
+                android:editable="true"
+                android:focusable="true"
+                android:hint="email@mail.com"
+                android:layout_gravity="center"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="20dp" />
+            <Button
+                android:id="@+id/aceptarMail"
+                android:text="ACEPTAR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:layout_gravity="center" />
+
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <com.example.meriadok.aprendealeer2.AutoResizeTextViewSunn
+                    android:textColor="#fea"
+                    style="@style/Base.TextAppearance.AppCompat.Large"
+                    android:id="@+id/addAlumnoTitulo"
+                    android:text="Para agregar un alumno, ingrese los datos:"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="10dp"/>
+
+                <EditText
+                    android:id="@+id/rutAlumno"
+                    android:hint="Rut Alumno"
+                    android:textSize="18sp"
+                    android:inputType="textCapCharacters"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"/>
+
+                <EditText
+                    android:id="@+id/nombreAlumno"
+                    android:textSize="18sp"
+                    android:hint="Nombre Alumno"
+                    android:inputType="textPersonName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="10dp"/>
+
+                <info.hoang8f.widget.FButton
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    fbutton:buttonColor="#1abc9c"
+                    android:textAllCaps="true"
+                    android:text="Agregar"
+                    android:id="@+id/botonAgregarAlumno"
+                    android:layout_height="50dp"
+                    android:layout_width="100dp"
+                    android:layout_gravity="center_horizontal" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+
+
+
+    </ViewFlipper>
+
+
+
+</LinearLayout>

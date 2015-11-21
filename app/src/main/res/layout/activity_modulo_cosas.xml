@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    android:background="@drawable/image_bg_game"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.meriadok.aprendealeer2.ModuloCosas">
+
+    <ViewFlipper
+        android:id="@+id/flipperCosas"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <com.example.meriadok.aprendealeer2.AutoResizeTextView
+                android:id="@+id/palabraCosas"
+                android:gravity="center"
+                android:layout_weight="0.1"
+                android:textSize="80sp"
+                android:textStyle="bold"
+                android:text="@array/cosasArray"
+                android:textColor="#FF0000"
+                android:maxLines="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+            <ImageView
+                android:id="@+id/tapAnimationCosas"
+                android:layout_weight="0.9"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/imagenCosa"
+                android:src="@drawable/cama"
+                android:layout_gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/image_bg"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/irJuegoCosas"
+                android:text="@string/Jugar"
+                android:textSize="30sp"
+                android:layout_width="270dp"
+                android:layout_height="60dp"
+                android:textColor="#FFFFFF"
+                fbutton:buttonColor="#1abc9c"
+                android:textAllCaps="true"
+                android:layout_marginTop="160dp"
+                android:layout_gravity="center" />
+
+            <View
+                android:id="@+id/separacion"
+                android:layout_width="0dp"
+                android:layout_height="50dp" />
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/irAtras"
+                android:text="@string/repetir"
+                android:textSize="30sp"
+                android:layout_width="270dp"
+                android:layout_height="60dp"
+                android:textColor="#FFFFFF"
+                fbutton:buttonColor="#1abc9c"
+                android:textAllCaps="true"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
+    </ViewFlipper>
+
+</RelativeLayout>

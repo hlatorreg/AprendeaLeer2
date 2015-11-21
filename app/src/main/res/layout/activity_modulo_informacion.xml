@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/image_bg"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.meriadok.aprendealeer2.ModuloInformacion">
+
+
+    <com.example.meriadok.aprendealeer2.AutoResizeTextViewSunn
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:text="Opciones"
+        android:textColor="#fea"
+        android:id="@+id/tituloOpciones"
+        android:layout_marginTop="43dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <ScrollView
+        android:layout_below="@id/tituloOpciones"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <info.hoang8f.widget.FButton
+                android:textColor="#FFFFFF"
+                fbutton:buttonColor="#1abc9c"
+                android:textSize="20sp"
+                android:textAllCaps="true"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:text="agregar alumno"
+                android:id="@+id/opcionesAgregarAlumno"
+                android:layout_gravity="center_horizontal" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <info.hoang8f.widget.FButton
+                android:textColor="#FFFFFF"
+                fbutton:buttonColor="#1abc9c"
+                android:textSize="20sp"
+                android:textAllCaps="true"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:text="cambiar alumno"
+                android:id="@+id/opcionesCambiarAlumno"
+                android:layout_gravity="center_horizontal" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <info.hoang8f.widget.FButton
+                android:textColor="#FFFFFF"
+                fbutton:buttonColor="#1abc9c"
+                android:textSize="20sp"
+                android:textAllCaps="true"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:text="cambiar e-mail"
+                android:id="@+id/opcionesCambiarMail"
+                android:layout_gravity="center_horizontal" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <!--<VideoView
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/pruebaVideo"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" /> -->
+
+
+</RelativeLayout>
