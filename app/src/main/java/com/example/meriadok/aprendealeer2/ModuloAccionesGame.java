@@ -263,6 +263,8 @@ public class ModuloAccionesGame extends AppCompatActivity {
         palabrasAcciones = getResources().getStringArray(R.array.accionesArray);
         llenarImagenes();
 
+        llenarDatosAlumno();
+
         //Setup de los elementos de la pantalla, views de texto con las opciones, puntaje.
         opcion1 = (TextView) findViewById(R.id.opcion1);
         opcion2 = (TextView) findViewById(R.id.opcion2);
@@ -346,7 +348,7 @@ public class ModuloAccionesGame extends AppCompatActivity {
         Toast.makeText(ModuloAccionesGame.this, "Sesión Completada ", Toast.LENGTH_LONG).show();
         crearAlarmasParaNotificaciones();
         sesionManager.aumentarSesiones();
-        sesionManager.mostrarAlerta();
+        sesionManager.mostrarAlerta(alumno);
     }
 
     /***
@@ -366,6 +368,13 @@ public class ModuloAccionesGame extends AppCompatActivity {
                 scheduleClient2,
                 scheduleClient3,
                 scheduleClient4, alumno.getRut() + " " + alumno.getNombre());
+    }
+
+    public void llenarDatosAlumno() {
+        SesionManager sesionManager = new SesionManager(context, miDB);
+        Alumno al = new Alumno();
+        al.setRut(sesionManager.getRut());
+        alumno = miDB.getDatosAlumno(al);
     }
 
     @Override

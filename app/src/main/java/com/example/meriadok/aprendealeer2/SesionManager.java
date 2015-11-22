@@ -60,22 +60,22 @@ public class SesionManager extends Activity {
     }
 
 
-    public boolean mismoDia() {
+    public boolean mismoDia(Alumno alumno) {
         dataBase = new DataBase(context);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String fecha = simpleDateFormat.format(calendar.getTime());
-        String ultimaFecha = dataBase.extraerFechaUltimaActividad();
+        String ultimaFecha = dataBase.extraerFechaUltimaActividad(alumno);
         ultimaFecha = ultimaFecha.substring(0, 10);
         Log.d(TAG, ultimaFecha + " " + fecha);
         return fecha.equals(ultimaFecha);
     }
 
-    public void mostrarAlerta() {
+    public void mostrarAlerta(Alumno alumno) {
         System.out.println("Comenzando mostrarAlerta()");
         final Activity activity = (Activity) context;
         if ((valorSesiones() <= 5)) {
-            if (!mismoDia())
+            if (!mismoDia(alumno))
                 resetValorSesiones();
             AlertDialog alertDialog = new AlertDialog.Builder(context).create();
             alertDialog.setTitle("Recordatorio");
@@ -141,8 +141,8 @@ public class SesionManager extends Activity {
         return (valorSesiones() == 5);
     }
 
-    public void cambioDia() {
-        if (mismoDia())
+    public void cambioDia(Alumno alumno) {
+        if (mismoDia(alumno))
             resetValorSesiones();
     }
 

@@ -142,9 +142,9 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     //TODO
-    public String extraerFechaUltimaActividad() {
+    public String extraerFechaUltimaActividad(Alumno alumno) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "select fecha from " + NOMBRE_TABLA_SESION + " order by rowid desc limit 1";
+        String query = "select fecha from " + NOMBRE_TABLA_SESION + " where " + SESION_COL_1 + "='" + alumno.getRut() + "'";
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -301,6 +301,16 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL(query);
         Log.d(TAG, "Tipo de dia cambiado a " + tipo);
         db.close();
+    }
+
+    public String extraerEmail(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "select " + TUTOR_COL_1 + " from " + NOMBRE_TABLA_TUTOR;
+        Cursor cursor= db.rawQuery(query, null);
+        cursor.moveToFirst();
+        String email = cursor.getString(0);
+        db.close();
+        return email;
     }
 
 }

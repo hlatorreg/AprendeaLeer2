@@ -48,6 +48,7 @@ public class ModuloPadres extends AppCompatActivity {
     private SoundPool sonidoPapa;
     private Handler HMostrarM = new Handler();
     private Handler HMostrarP = new Handler();
+    private Handler HMostrarV = new Handler();
     private Handler cargaSonidos = new Handler();
     private static final String TAG = ModuloPadres.class.getSimpleName();
     private Context context;
@@ -268,6 +269,24 @@ public class ModuloPadres extends AppCompatActivity {
         }
     };
 
+    private Runnable aVideo = new Runnable() {
+        @Override
+        public void run() {
+            viewFlipper.setDisplayedChild(6);
+            video = (VideoView) findViewById(R.id.videoVictoria);
+            String urlpath = "android.resource://" + getPackageName() + "/" + R.raw.estrellas;
+            video.setVideoURI(Uri.parse(urlpath));
+            video.start();
+
+            video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    finish();
+                }
+            });
+        }
+    };
+
     public void finActividadDiaImpar() {
         Log.d(TAG, "ejecutando finActividadDiaImpar");
         Log.d(TAG, " Numero de sesiones: " + sesionManager.valorSesiones());
@@ -283,7 +302,7 @@ public class ModuloPadres extends AppCompatActivity {
             //editor.apply();
             miDB.cambiarTipoDia(alumno);
         }
-        sesionManager.mostrarAlerta();
+        sesionManager.mostrarAlerta(alumno);
     }
 
     //TODO terminar este modulo, verificar que la comparacion de valorSesiones se realize en de forma adecuada en el tipo de dia.
@@ -295,18 +314,7 @@ public class ModuloPadres extends AppCompatActivity {
             Log.d(TAG, "Puntaje maximo alcanzado, desbloqueando modulo cuerpo");
             miDB.modificarDesbloqueo(alumno, "cuerpo");
             Toast.makeText(this, "Desbloqueado Modulo Cuerpo", Toast.LENGTH_LONG).show();
-            viewFlipper.setDisplayedChild(6);
-            video = (VideoView) findViewById(R.id.videoVictoria);
-            String urlpath = "android.resource://" + getPackageName() + "/" + R.raw.estrellas;
-            video.setVideoURI(Uri.parse(urlpath));
-            video.start();
-
-            video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    finish();
-                }
-            });
+            HMostrarV.postDelayed(aVideo, 1000);
             //finish();
         } else {
             if (sesionManager.valorSesiones() == 5) {
@@ -316,12 +324,12 @@ public class ModuloPadres extends AppCompatActivity {
                 //editor.putString("tipo", "impar");
                 //editor.apply();
                 miDB.cambiarTipoDia(alumno);
-                sesionManager.mostrarAlerta();
+                sesionManager.mostrarAlerta(alumno);
             } else {
                 sesionManager.aumentarSesiones();
                 miDB.sumarSesiones(alumno);
                 //TODO metodo funciona incorrectamente, siempre resetea las sesiones ya que el metodo mismoDia() llama a extraerFechaUltimaAct.. y su query es incorrecta.
-                sesionManager.mostrarAlerta();
+                sesionManager.mostrarAlerta(alumno);
             }
         }
     }

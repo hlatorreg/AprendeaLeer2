@@ -161,8 +161,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Numero de sesiones = " + sesionManager.valorSesiones());
 
         sesionAlumno.setText("Alumno: " + sesionManager.getNombre() + " " + sesionManager.getRut());
+        Alumno alumno = new Alumno();
+        alumno.setRut(sesionManager.getRut());
+        alumno.setNombre(sesionManager.getNombre());
 
-        if (!sesionManager.mismoDia()) {
+        if (!sesionManager.mismoDia(alumno)) {
             sesionManager.resetValorSesiones();
             Log.d(TAG, "Cambio de dia, se resetearon las sesiones");
             Log.d(TAG, "Numero de sesiones = " + sesionManager.valorSesiones());

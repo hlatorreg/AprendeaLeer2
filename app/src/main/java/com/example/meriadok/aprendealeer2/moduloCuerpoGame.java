@@ -357,7 +357,7 @@ public class moduloCuerpoGame extends Activity {
         Toast.makeText(moduloCuerpoGame.this, "Sesión Completada ", Toast.LENGTH_LONG).show();
         crearAlarmasParaNotificaciones();
         sesionManager.aumentarSesiones();
-        sesionManager.mostrarAlerta();
+        sesionManager.mostrarAlerta(alumno);
     }
 
     /***

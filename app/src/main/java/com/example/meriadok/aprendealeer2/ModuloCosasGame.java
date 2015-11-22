@@ -358,7 +358,7 @@ public class ModuloCosasGame extends AppCompatActivity {
         Toast.makeText(ModuloCosasGame.this, "Sesión Completada ", Toast.LENGTH_LONG).show();
         crearAlarmasParaNotificaciones();
         sesionManager.aumentarSesiones();
-        sesionManager.mostrarAlerta();
+        sesionManager.mostrarAlerta(alumno);
     }
 
     /***
