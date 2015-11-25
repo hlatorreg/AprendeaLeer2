@@ -1,13 +1,13 @@
 package com.example.meriadok.aprendealeer2;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 import android.widget.ViewFlipper;
 
 import com.koushikdutta.ion.Ion;
@@ -46,7 +47,8 @@ public class ModuloAccionesGame extends AppCompatActivity {
     int puntaje = 0;
     int correcto;
     int op2, op3;
-    int LIMITE = 30;
+    //LIMITE cambia el numero de respuestas correctas necesarias
+    int LIMITE = 2;
     int INTENTOS = 0;
     //Arreglo con las palabras
     String[] palabrasAcciones;
@@ -61,6 +63,9 @@ public class ModuloAccionesGame extends AppCompatActivity {
     //finalmente llama el proximo handler
     private Handler hOpciones = new Handler();
 
+    //handler para reproducir el video
+    private Handler hVideo = new Handler();
+
     //Handler a cargo de setear las opciones de la proxima pantalla, elije palabras al azar
     //y elije la respuesta correcta al azar, cambia las TextView de acuerdo con estas opciones
     //finalmente cambia al proximo flip (pantalla imagen) y llama al handler
@@ -74,6 +79,8 @@ public class ModuloAccionesGame extends AppCompatActivity {
     private ScheduleClient scheduleClient4;
 
     private Alumno alumno;
+
+    private VideoView video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,15 +181,15 @@ public class ModuloAccionesGame extends AppCompatActivity {
             Log.d(TAG, "runnable aImagen");
             if (puntaje == LIMITE) {
                 Log.d(TAG, "puntaje == LIMITE, " + puntaje + " == " + LIMITE);
-                SharedPreferences sharedPreferences = context.getSharedPreferences("logros", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("desbloquearLibro", true);
-                editor.apply();
-                flipJuego.setDisplayedChild(2);
-                sonidoEstrella.play(sonidoEstrellaId, 1, 1, 1, 0, 1);
-                hDesbloqueo.postDelayed(aDesbloqueo, 2500);
+                //Proximas 2 lineas cambian los valores de los desbloqueos en la BD
+                llenarDatosAlumno();
+                miDB.modificarDesbloqueo(alumno, "libro");
+                Toast.makeText(context, "Completaste Aprende a Leer!!", Toast.LENGTH_LONG).show();
+                hDesbloqueo.postDelayed(aDesbloqueo, 0);
+
             } else if (INTENTOS == LIMITE) {
                 Log.d(TAG, "INTENTOS == LIMITE, " + INTENTOS + " == " + LIMITE);
+                llenarDatosAlumno();
                 finActividad();
             } else {
                 //Volvemos a crear 3 numeros al azar, ademas se crea otro para indicar
@@ -234,7 +241,7 @@ public class ModuloAccionesGame extends AppCompatActivity {
         public void run() {
             Log.d(TAG, "runnable aDesbloqueo");
             System.gc();
-            finActividad();
+            hVideo.postDelayed(aVideo, 1000);
         }
     };
 
@@ -350,6 +357,24 @@ public class ModuloAccionesGame extends AppCompatActivity {
         sesionManager.aumentarSesiones();
         sesionManager.mostrarAlerta(alumno);
     }
+
+    private Runnable aVideo = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "Reproduciendo video");
+            setContentView(R.layout.video);
+            video = (VideoView) findViewById(R.id.videoVictoria);
+            String urlpath = "android.resource://" + getPackageName() + "/" + R.raw.estrellas;
+            video.setVideoURI(Uri.parse(urlpath));
+            video.start();
+            video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    finish();
+                }
+            });
+        }
+    };
 
     /***
      * Creamos objetos calendarios con la fecha en la que se termino

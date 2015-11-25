@@ -2,6 +2,7 @@ package com.example.meriadok.aprendealeer2;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -13,6 +14,8 @@ public class AlarmManager {
 
     private Context context;
     private DataBase dataBase;
+    private static final String TAG = AlarmManager.class.getSimpleName();
+
 
     public AlarmManager(Context context) {
         this.context = context;
@@ -51,10 +54,16 @@ public class AlarmManager {
         Calendar c3 = Calendar.getInstance();
         Calendar c4 = Calendar.getInstance();
 
-        c1.set(Calendar.MINUTE, c1.get(Calendar.MINUTE) + 1);
-        c2.set(Calendar.MINUTE, c2.get(Calendar.MINUTE) + 2);
-        c3.set(Calendar.MINUTE, c3.get(Calendar.MINUTE) + 3);
-        c4.set(Calendar.MINUTE, c4.get(Calendar.MINUTE) + 4);
+        //Cambiar el valor del segunto argumento para cambiar la fecha de la alarma
+        c1.set(Calendar.HOUR, c1.get(Calendar.HOUR) + 1);
+        c2.set(Calendar.HOUR, c2.get(Calendar.HOUR) + 2);
+        c3.set(Calendar.HOUR, c3.get(Calendar.HOUR) + 3);
+        c4.set(Calendar.HOUR, c4.get(Calendar.HOUR) + 4);
+
+        Log.d(TAG, c1.toString());
+        Log.d(TAG, c2.toString());
+        Log.d(TAG, c3.toString());
+        Log.d(TAG, c4.toString());
 
         editor.putLong("fecha1", c1.getTimeInMillis());
         editor.putLong("fecha2", c2.getTimeInMillis());
@@ -63,11 +72,11 @@ public class AlarmManager {
         editor.apply();
 
 
-        System.out.println("Nuevas fechas para alarmas");
-        System.out.println(c1.getTimeInMillis());
-        System.out.println(c2.getTimeInMillis());
-        System.out.println(c3.getTimeInMillis());
-        System.out.println(c4.getTimeInMillis());
+       Log.d(TAG, "Nuevas fechas para alarmas");
+        Log.d(TAG, "" + c1.getTimeInMillis());
+        Log.d(TAG, "" + c2.getTimeInMillis());
+        Log.d(TAG, "" + c3.getTimeInMillis());
+        Log.d(TAG, "" + c4.getTimeInMillis());
 
         scheduleClient1.setAlarmForNotification(c1, 1, alumno);
         scheduleClient2.setAlarmForNotification(c2, 2, alumno);

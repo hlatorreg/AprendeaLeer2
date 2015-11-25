@@ -34,6 +34,7 @@ public class ModuloCuerpo extends AppCompatActivity {
     int contadorPalabras;
     int contadorPantallas;
     private static final String TAG = ModuloCuerpo.class.getSimpleName();
+    //TODO cambiar a X para funcionamiento basico
     private static final int TOTAL_PALABRAS = 2;
 
     //Arreglos de las palabras a usar y las ID's de los archivos de audio, luego se a�adiran las ID's de las imagenes

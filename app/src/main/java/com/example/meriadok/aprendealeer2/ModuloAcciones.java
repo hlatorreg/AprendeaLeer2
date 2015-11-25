@@ -34,7 +34,8 @@ public class ModuloAcciones extends AppCompatActivity {
     int contadorPalabras;
     int contadorPantallas;
     private static final String TAG = ModuloAcciones.class.getSimpleName();
-    private static final int TOTAL_PALABRAS = 9;
+    //TODO cambiar a 9 para funcionamiento estandar
+    private static final int TOTAL_PALABRAS = 2;
 
     //Arreglos de las palabras a usar y las ID's de los archivos de audio, luego se a�adiran las ID's de las imagenes
     String[] palabrasAcciones;

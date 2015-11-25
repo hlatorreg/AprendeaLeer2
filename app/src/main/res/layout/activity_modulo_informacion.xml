@@ -68,14 +68,28 @@
                 android:text="cambiar e-mail"
                 android:id="@+id/opcionesCambiarMail"
                 android:layout_gravity="center_horizontal" />
+
             <View
                 android:layout_width="0dp"
-                android:layout_height="20dp" />
+                android:layout_height="100dp" />
 
+
+            <info.hoang8f.widget.FButton
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:layout_width="120dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                fbutton:buttonColor="#d93649"
+                android:text="Atras"
+                android:id="@+id/botonAtras" />
 
 
 
         </LinearLayout>
+
+
 
 
     </ScrollView>

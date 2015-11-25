@@ -70,8 +70,6 @@ public class ModuloPadres extends AppCompatActivity {
         Alumno al = new Alumno();
         al.setRut(sesionManager.getRut());
         alumno = miDB.getDatosAlumno(al);
-        //SharedPreferences sharedPreferences = this.getSharedPreferences("vecesDia", Context.MODE_PRIVATE);
-        //SharedPreferences sharedPreferencesLogros = this.getSharedPreferences("logros", Context.MODE_PRIVATE);
         //TODO Importante, cambiar tipo de dia a impar para presentación, dia par con el fin de probar el juego en si
         //dia = sharedPreferences.getString("tipo", "impar");
         dia = alumno.getTipo_dia();
@@ -240,7 +238,6 @@ public class ModuloPadres extends AppCompatActivity {
     private void comenzarJuego() {
         Log.d(TAG, "ejecutando comenzarJuego()");
         viewFlipper.setDisplayedChild(3);
-        //sesionManager.aumentarSesiones();
         transparentarImagenes();
         sonidoMama.play(mamaId, 1, 1, 1, 0, 1);
         correcto = "mama";
@@ -297,9 +294,6 @@ public class ModuloPadres extends AppCompatActivity {
         if (sesionManager.valorSesiones() == 5) {
             Log.d("finActividadImpar()", " Se alcanzo el maximo de sesiones");
             //TODO comentado para ver comportamiento con el cambio a la BD
-            //SharedPreferences.Editor editor = getSharedPreferences("vecesDia", Context.MODE_PRIVATE).edit();
-            //editor.putString("tipo", "par");
-            //editor.apply();
             miDB.cambiarTipoDia(alumno);
         }
         sesionManager.mostrarAlerta(alumno);
@@ -309,20 +303,15 @@ public class ModuloPadres extends AppCompatActivity {
     public void finActividadDiaPar() {
         Log.d(TAG, "runnable aOpcionesJuego");
         Log.d(TAG, " : " + sesionManager.valorSesiones());
-
+        miDB.insertFechaUltimaActividad(getFecha(), "Padres", alumno);
         if (puntaje == PUNTAJE_MAXIMO) {
             Log.d(TAG, "Puntaje maximo alcanzado, desbloqueando modulo cuerpo");
             miDB.modificarDesbloqueo(alumno, "cuerpo");
             Toast.makeText(this, "Desbloqueado Modulo Cuerpo", Toast.LENGTH_LONG).show();
             HMostrarV.postDelayed(aVideo, 1000);
-            //finish();
         } else {
             if (sesionManager.valorSesiones() == 5) {
                 Log.d(TAG, "Se alcanzo el maximo de sesiones");
-                //TODO comentado para ver comportamiento con el cambio a la BD
-                //SharedPreferences.Editor editor = getSharedPreferences("vecesDia", Context.MODE_PRIVATE).edit();
-                //editor.putString("tipo", "impar");
-                //editor.apply();
                 miDB.cambiarTipoDia(alumno);
                 sesionManager.mostrarAlerta(alumno);
             } else {

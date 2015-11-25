@@ -18,15 +18,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
+            <com.example.meriadok.aprendealeer2.AutoResizeTextViewSunn
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ingrese su correo electronico:"
-                android:textSize="30sp"
+                android:textSize="50sp"
                 android:layout_gravity="center"
                 android:textColor="#fea"
                 android:padding="20dp"
-                />
+                android:textStyle="bold" />
 
             <EditText
                 android:typeface="monospace"
@@ -40,19 +40,19 @@
                 android:editable="true"
                 android:focusable="true"
                 android:hint="email@mail.com"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
+
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="20dp" />
-            <Button
+
+            <info.hoang8f.widget.FButton
                 android:id="@+id/aceptarMail"
                 android:text="ACEPTAR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:shadowColor="#A8A8A8"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="5"
+                android:textColor="#FFFFFF"
+                fbutton:buttonColor="#1abc9c"
                 android:layout_gravity="center" />
 
 
@@ -76,9 +76,10 @@
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content" />
+
                 <View
                     android:layout_width="fill_parent"
-                    android:layout_height="10dp"/>
+                    android:layout_height="10dp" />
 
                 <EditText
                     android:id="@+id/rutAlumno"
@@ -90,7 +91,7 @@
 
                 <View
                     android:layout_width="fill_parent"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp" />
 
                 <EditText
                     android:id="@+id/nombreAlumno"
@@ -102,18 +103,45 @@
 
                 <View
                     android:layout_width="fill_parent"
-                    android:layout_height="10dp"/>
+                    android:layout_height="10dp" />
 
-                <info.hoang8f.widget.FButton
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    fbutton:buttonColor="#1abc9c"
-                    android:textAllCaps="true"
-                    android:text="Agregar"
-                    android:id="@+id/botonAgregarAlumno"
-                    android:layout_height="50dp"
-                    android:layout_width="100dp"
-                    android:layout_gravity="center_horizontal" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp">
+
+                    <info.hoang8f.widget.FButton
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        fbutton:buttonColor="#d93649"
+                        android:textAllCaps="false"
+                        android:text="Cancelar"
+                        android:id="@+id/botonCancelarAlumno"
+                        android:layout_height="50dp"
+                        android:layout_width="100dp"
+                        android:layout_gravity="center_horizontal" />
+
+                    <View
+                        android:layout_width="20sp"
+                        android:layout_height="fill_parent" />
+
+                    <info.hoang8f.widget.FButton
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        fbutton:buttonColor="#1abc9c"
+                        android:textAllCaps="false"
+                        android:text="Agregar"
+                        android:id="@+id/botonAceptarAlumno"
+                        android:layout_height="50dp"
+                        android:layout_width="100dp"
+                        android:layout_gravity="center_horizontal" />
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -121,11 +149,7 @@
         </ScrollView>
 
 
-
-
-
     </ViewFlipper>
-
 
 
 </LinearLayout>

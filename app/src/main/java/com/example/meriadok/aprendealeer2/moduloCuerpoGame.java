@@ -1,13 +1,14 @@
 package com.example.meriadok.aprendealeer2;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 import android.widget.ViewFlipper;
 
 import com.koushikdutta.ion.Ion;
@@ -24,8 +26,7 @@ import java.util.Calendar;
 import java.util.Random;
 import java.util.Vector;
 
-
-public class moduloCuerpoGame extends Activity {
+public class moduloCuerpoGame extends AppCompatActivity {
     //Objeto que se comunica con la base de datos
     private DataBase miDB;
     //Recursos de pantalla
@@ -61,6 +62,9 @@ public class moduloCuerpoGame extends Activity {
     //actualiza el texto con el fin de darle la propiedad onClick
     private Handler hDesbloqueo = new Handler();
 
+    //handler para reproducir el video
+    private Handler hVideo = new Handler();
+
     //Handler a cargo de setear las opciones de la proxima pantalla, elije palabras al azar
     //y elije la respuesta correcta al azar, cambia las TextView de acuerdo con estas opciones
     //finalmente cambia al proximo flip (pantalla imagen) y llama al handler
@@ -72,8 +76,10 @@ public class moduloCuerpoGame extends Activity {
     private ScheduleClient scheduleClient2;
     private ScheduleClient scheduleClient3;
     private ScheduleClient scheduleClient4;
-
+    //Objeto para guardar y extraer datos del alumno.
     private Alumno alumno;
+
+    private VideoView video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,18 +180,12 @@ public class moduloCuerpoGame extends Activity {
             Log.d(TAG, "runnable aImagen");
             if (puntaje == LIMITE) {
                 Log.d(TAG, "puntaje == LIMITE, " + puntaje + " == " + LIMITE);
-                /* //TODO borrar si funciona codigo en finActividad para cambiar los valores de los desbloqueos en la BD
-                SharedPreferences sharedPreferences = context.getSharedPreferences("logros", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("desbloquearCosas", true);
-                editor.apply();
-                */
                 //Proximas 2 lineas cambian los valores de los desbloqueos en la BD
                 llenarDatosAlumno();
                 miDB.modificarDesbloqueo(alumno, "cosas");
-                flipJuego.setDisplayedChild(2);
-                sonidoEstrella.play(sonidoEstrellaId, 1, 1, 1, 0, 1);
-                hDesbloqueo.postDelayed(aDesbloqueo, 2500);
+                Toast.makeText(context, "Desbloqueado Modulo Cosas", Toast.LENGTH_LONG).show();
+                hDesbloqueo.postDelayed(aDesbloqueo, 0);
+
             } else if (INTENTOS == LIMITE) {
                 Log.d(TAG, "INTENTOS == LIMITE, " + INTENTOS + " == " + LIMITE);
                 llenarDatosAlumno();
@@ -240,7 +240,7 @@ public class moduloCuerpoGame extends Activity {
         public void run() {
             Log.d(TAG, "runnable aDesbloqueo");
             System.gc();
-            finActividad();
+            hVideo.postDelayed(aVideo, 1000);
         }
     };
 
@@ -269,6 +269,8 @@ public class moduloCuerpoGame extends Activity {
          */
         palabrasCuerpo = getResources().getStringArray(R.array.cuerpoArray);
         llenarImagenes();
+
+        llenarDatosAlumno();
 
         //Setup de los elementos de la pantalla, views de texto con las opciones, puntaje.
         opcion1 = (TextView) findViewById(R.id.opcion1);
@@ -353,12 +355,31 @@ public class moduloCuerpoGame extends Activity {
 
     public void finActividad() {
         Log.d(TAG, "ejecutando finActividad()");
+        miDB = new DataBase(this);
         SesionManager sesionManager = new SesionManager(context, miDB);
         Toast.makeText(moduloCuerpoGame.this, "Sesión Completada ", Toast.LENGTH_LONG).show();
         crearAlarmasParaNotificaciones();
         sesionManager.aumentarSesiones();
         sesionManager.mostrarAlerta(alumno);
     }
+
+    private Runnable aVideo = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "Reproduciendo video");
+            setContentView(R.layout.video);
+            video = (VideoView) findViewById(R.id.videoVictoria);
+            String urlpath = "android.resource://" + getPackageName() + "/" + R.raw.estrellas;
+            video.setVideoURI(Uri.parse(urlpath));
+            video.start();
+            video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    finish();
+                }
+            });
+        }
+    };
 
     /***
      * Creamos objetos calendarios con la fecha en la que se termino

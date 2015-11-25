@@ -31,6 +31,7 @@ public class ModuloInformacion extends Activity {
     private String resultado;
     private int posicion;
     private Context context;
+    private static final String TAG = ModuloInformacion.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class ModuloInformacion extends Activity {
         final Button agregarAlumno = (Button) findViewById(R.id.opcionesAgregarAlumno);
         final Button cambiarAlumno = (Button) findViewById(R.id.opcionesCambiarAlumno);
         final Button cambiarMail = (Button) findViewById(R.id.opcionesCambiarMail);
+        final Button atras = (Button) findViewById(R.id.botonAtras);
 
         agregarAlumno.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +74,20 @@ public class ModuloInformacion extends Activity {
             @Override
             public void onClick(View v) {
                 cambiarDeAlumno();
+            }
+        });
+
+        cambiarMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cambiarEmailTutor();
+            }
+        });
+
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -93,6 +109,8 @@ public class ModuloInformacion extends Activity {
             @Override
             public void onClick(View v) {
                 resultado = listaAlumnos.getItemAtPosition(posicion).toString();
+                Log.d(TAG, resultado);
+                Toast.makeText(ModuloInformacion.this, "Alumno cambiado", Toast.LENGTH_LONG).show();
                 cambiarDatos(resultado);
             }
         });
@@ -142,7 +160,8 @@ public class ModuloInformacion extends Activity {
         flipper.setDisplayedChild(1);
         final EditText rutAlumno = (EditText) findViewById(R.id.rutAlumno);
         final EditText nombreAlumno = (EditText) findViewById(R.id.nombreAlumno);
-        final Button agregarAlumnoBoton = (Button) findViewById(R.id.botonAgregarAlumno);
+        final Button agregarAlumnoBoton = (Button) findViewById(R.id.botonAceptarAlumno);
+        final Button cancelarAlumnoBoton = (Button) findViewById(R.id.botonCancelarAlumno);
 
         agregarAlumnoBoton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +190,45 @@ public class ModuloInformacion extends Activity {
 
             }
         });
+
+        cancelarAlumnoBoton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preparaPantalla();
+            }
+        });
+
+    }
+
+    public void cambiarEmailTutor(){
+        setContentView(R.layout.modulo_cambio_email);
+        final EditText textoEmail = (EditText) findViewById(R.id.cambioCorreoTexto);
+        final Button botonAceptarMail = (Button) findViewById(R.id.botonAceptarCambiarEmail);
+        final Button botonCancelarMail = (Button) findViewById(R.id.botonCancelarEmail);
+
+        botonAceptarMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = textoEmail.getText().toString();
+                if(!email.equals("")){
+                    miDB.cambiarEmail(email);
+                    Toast.makeText(ModuloInformacion.this, "Correo cambiado con exito", Toast.LENGTH_LONG).show();
+                    setContentView(R.layout.activity_main);
+                    preparaPantalla();
+                } else {
+                    Toast.makeText(ModuloInformacion.this, "Ingrese el nuevo correo", Toast.LENGTH_LONG).show();
+                    textoEmail.setText("");
+                }
+            }
+        });
+
+        botonCancelarMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preparaPantalla();
+            }
+        });
+
 
     }
 

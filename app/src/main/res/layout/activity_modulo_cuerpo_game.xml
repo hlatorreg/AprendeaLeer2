@@ -148,6 +148,26 @@
 
        </RelativeLayout>
 
+       <RelativeLayout
+           android:orientation="vertical"
+           android:id="@+id/layoutVideo"
+           android:weightSum="1"
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent">
+
+           <VideoView
+               android:layout_alignParentTop="true"
+               android:layout_alignParentBottom="true"
+               android:layout_alignParentLeft="true"
+               android:layout_alignParentRight="true"
+               android:scaleType="fitXY"
+               android:id="@+id/videoVictoria"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent" />
+
+
+       </RelativeLayout>
+
    </ViewFlipper>
 
 </LinearLayout>

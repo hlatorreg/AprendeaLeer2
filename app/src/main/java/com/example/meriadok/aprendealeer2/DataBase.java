@@ -141,7 +141,6 @@ public class DataBase extends SQLiteOpenHelper {
         }
     }
 
-    //TODO
     public String extraerFechaUltimaActividad(Alumno alumno) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "select fecha from " + NOMBRE_TABLA_SESION + " where " + SESION_COL_1 + "='" + alumno.getRut() + "'";
@@ -311,6 +310,15 @@ public class DataBase extends SQLiteOpenHelper {
         String email = cursor.getString(0);
         db.close();
         return email;
+    }
+
+    public void cambiarEmail(String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "update " + NOMBRE_TABLA_TUTOR + " SET " + TUTOR_COL_1 + "='" + email + "'";
+        Log.d(TAG, query);
+        db.execSQL(query);
+        Log.d(TAG, "Email de tutor cambiado a " + email );
+        db.close();
     }
 
 }

@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     //private Button agregarAlumnoBoton;
     private static final String TAG = MainActivity.class.getSimpleName();
     private Context context;
+    boolean esPrimera; //valor booleano donde guardamos la sharedpref
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,19 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupPantalla() {
         SharedPreferences sp = this.getSharedPreferences("esPrimera", Context.MODE_PRIVATE); //sharedpref para asegurar que es la primera vez que se corre el juego
-        boolean esPrimera = sp.getBoolean("estado", true); //valor booleano donde guardamos la sharedpref
-        boolean estaBloqueado = sp.getBoolean("bloqueado", false);
+        esPrimera = sp.getBoolean("estado", true);
+
+        //boolean estaBloqueado = sp.getBoolean("bloqueado", false);
 
         //Reseteamos el valor de la sp para la cantidad de sesiones con el fin de facilitar debug
         SesionManager sesionManager = new SesionManager(this, miDB);
         //TODO Cambiar valor a 0 para presentacion
-        //sesionManager.setValorSesiones(0);
+        //sesionManager.setValorSesiones(4);
 
 
         if (esPrimera) {  //si es la primera vez se entra a la vista alternativa de la actividad inicial
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putBoolean("estado", false); //cambiamos el valor de la sp a falso ya que corrimos el juego 1 vez
-            editor.apply();
             Log.d(TAG, "********** Primera vez que se abre la aplicacion ****************");
             setContentView(R.layout.activity_main_alt); //seteamos el contenido a la vista alternativa
             pantallaPrimeraVez();
@@ -78,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void pantallaPrimeraVez() {
         miDB = new DataBase(this); //creamos la base de datos que usaremos para guardar alumnos y tutores
-
+        SharedPreferences sp = this.getSharedPreferences("esPrimera", Context.MODE_PRIVATE); //sharedpref para asegurar que es la primera vez que se corre el juego
+        esPrimera = sp.getBoolean("estado", true);
+        final SharedPreferences.Editor editor = sp.edit();
 
         Log.d(TAG, "********** BASE DE DATOS CREADA ************");
         editMail = (EditText) findViewById(R.id.editMail);
@@ -87,14 +88,20 @@ public class MainActivity extends AppCompatActivity {
         aceptarMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (miDB.insertMail(editMail.getText().toString())) {
-                    System.out.println("********* MAIL INGRESADO *********");
-                    Toast.makeText(MainActivity.this, "Mail Ingresado", Toast.LENGTH_LONG).show();
-                    flipper.setDisplayedChild(1);
-                    agregarAlumno();
+                if(editMail.getText().toString().isEmpty()){
+                    Toast.makeText(MainActivity.this, "No a ingresado nada", Toast.LENGTH_LONG).show();
                 } else {
-                    System.out.println("********* FALLO AL INGRESAR MAIL *********");
-                    Toast.makeText(MainActivity.this, "Errortit", Toast.LENGTH_LONG).show();
+                    if (miDB.insertMail(editMail.getText().toString())) {
+                        Log.d(TAG, "********* MAIL INGRESADO *********");
+                        editor.putBoolean("estado", false); //cambiamos el valor de la sp a falso ya que corrimos el juego 1 vez
+                        editor.apply();
+                        Toast.makeText(MainActivity.this, "Mail Ingresado", Toast.LENGTH_LONG).show();
+                        flipper.setDisplayedChild(1);
+                        agregarAlumno();
+                    } else {
+                        Log.d(TAG, "********* FALLO AL INGRESAR MAIL *********");
+                        Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -107,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         rutAlumno = (EditText) findViewById(R.id.rutAlumno);
         nombreAlumno = (EditText) findViewById(R.id.nombreAlumno);
-        Button agregarAlumnoBoton = (Button) findViewById(R.id.botonAgregarAlumno);
+        Button agregarAlumnoBoton = (Button) findViewById(R.id.botonAceptarAlumno);
 
         agregarAlumnoBoton.setOnClickListener(new View.OnClickListener() {
             @Override

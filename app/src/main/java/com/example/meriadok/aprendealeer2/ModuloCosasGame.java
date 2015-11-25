@@ -1,13 +1,12 @@
 package com.example.meriadok.aprendealeer2;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 import android.widget.ViewFlipper;
 
 import com.koushikdutta.ion.Ion;
@@ -46,7 +46,8 @@ public class ModuloCosasGame extends AppCompatActivity {
     int puntaje = 0;
     int correcto;
     int op2, op3;
-    int LIMITE = 30;
+    //LIMITE cambia el numero de respuestas correctas necesarias
+    int LIMITE = 2;
     int INTENTOS = 0;
     //Arreglo con las palabras
     String[] palabrasCosas;
@@ -61,6 +62,9 @@ public class ModuloCosasGame extends AppCompatActivity {
     //actualiza el texto con el fin de darle la propiedad onClick
     private Handler hDesbloqueo = new Handler();
 
+    //handler para reproducir el video
+    private Handler hVideo = new Handler();
+
     //Handler a cargo de setear las opciones de la proxima pantalla, elije palabras al azar
     //y elije la respuesta correcta al azar, cambia las TextView de acuerdo con estas opciones
     //finalmente cambia al proximo flip (pantalla imagen) y llama al handler
@@ -74,6 +78,8 @@ public class ModuloCosasGame extends AppCompatActivity {
     private ScheduleClient scheduleClient4;
 
     private Alumno alumno;
+
+    private VideoView video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,16 +181,14 @@ public class ModuloCosasGame extends AppCompatActivity {
             if (puntaje == LIMITE) {
                 Log.d(TAG, "puntaje == LIMITE, " + puntaje + " == " + LIMITE);
                 //Proximas 5 lineas cambian los valores de los desbloqueos en la BD
-                SesionManager sesionManager = new SesionManager(context, miDB);
-                Alumno al = new Alumno();
-                al.setRut(sesionManager.getRut());
-                alumno = miDB.getDatosAlumno(al);
+                llenarDatosAlumno();
                 miDB.modificarDesbloqueo(alumno, "acciones");
-                flipJuego.setDisplayedChild(2);
-                sonidoEstrella.play(sonidoEstrellaId, 1, 1, 1, 0, 1);
-                hDesbloqueo.postDelayed(aDesbloqueo, 2500);
+                Toast.makeText(context, "Desbloqueado Modulo Acciones", Toast.LENGTH_LONG).show();
+                hDesbloqueo.postDelayed(aDesbloqueo, 0);
+
             } else if (INTENTOS == LIMITE) {
                 Log.d(TAG, "INTENTOS == LIMITE, " + INTENTOS + " == " + LIMITE);
+                llenarDatosAlumno();
                 finActividad();
             } else {
                 //Volvemos a crear 3 numeros al azar, ademas se crea otro para indicar
@@ -236,7 +240,7 @@ public class ModuloCosasGame extends AppCompatActivity {
         public void run() {
             Log.d(TAG, "runnable aDesbloqueo");
             System.gc();
-            finActividad();
+            hVideo.postDelayed(aVideo, 1000);
         }
     };
 
@@ -248,6 +252,7 @@ public class ModuloCosasGame extends AppCompatActivity {
 
     public void PreparaPantalla() {
         Log.d(TAG, "ejecutando PrepararPantall()");
+        miDB = new DataBase(context);
         /***
          * Creacion del vector de opciones, se llama a la funcion crearOpciones() para que lo llene,
          * luego se asigna los valores del vector a las opciones.
@@ -361,6 +366,24 @@ public class ModuloCosasGame extends AppCompatActivity {
         sesionManager.mostrarAlerta(alumno);
     }
 
+    private Runnable aVideo = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "Reproduciendo video");
+            setContentView(R.layout.video);
+            video = (VideoView) findViewById(R.id.videoVictoria);
+            String urlpath = "android.resource://" + getPackageName() + "/" + R.raw.estrellas;
+            video.setVideoURI(Uri.parse(urlpath));
+            video.start();
+            video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    finish();
+                }
+            });
+        }
+    };
+
     /***
      * Creamos objetos calendarios con la fecha en la que se termino
      * la actividad, a esa fecha le agregamos el tiempo acordado con el cliente.
@@ -378,6 +401,13 @@ public class ModuloCosasGame extends AppCompatActivity {
                 scheduleClient2,
                 scheduleClient3,
                 scheduleClient4, alumno.getRut() + " " + alumno.getNombre());
+    }
+
+    public void llenarDatosAlumno() {
+        SesionManager sesionManager = new SesionManager(context, miDB);
+        Alumno al = new Alumno();
+        al.setRut(sesionManager.getRut());
+        alumno = miDB.getDatosAlumno(al);
     }
 
     @Override
