@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private Context context;
     boolean esPrimera; //valor booleano donde guardamos la sharedpref
+    boolean resume = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public void setupPantalla() {
         SharedPreferences sp = this.getSharedPreferences("esPrimera", Context.MODE_PRIVATE); //sharedpref para asegurar que es la primera vez que se corre el juego
         esPrimera = sp.getBoolean("estado", true);
-
+        miDB = new DataBase(this);
         //boolean estaBloqueado = sp.getBoolean("bloqueado", false);
 
         //Reseteamos el valor de la sp para la cantidad de sesiones con el fin de facilitar debug
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         //sesionManager.setValorSesiones(4);
 
 
-        if (esPrimera) {  //si es la primera vez se entra a la vista alternativa de la actividad inicial
+        if (esPrimera && !miDB.existeEmail()) {  //si es la primera vez se entra a la vista alternativa de la actividad ini      cial
             Log.d(TAG, "********** Primera vez que se abre la aplicacion ****************");
             setContentView(R.layout.activity_main_alt); //seteamos el contenido a la vista alternativa
             pantallaPrimeraVez();

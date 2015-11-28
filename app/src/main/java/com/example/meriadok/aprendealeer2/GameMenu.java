@@ -44,6 +44,7 @@ public class GameMenu extends AppCompatActivity {
         Alumno al = miDB.getDatosAlumno(alumno);
         Log.d(TAG, al.getNombre() + " " + al.getRut() + " " + al.getD_cuerpo() + " " + al.getD_cosas() + " " + al.getD_acciones());
         sesionManager.asignarAsharedPref(al);
+        sesionManager.setDatosAlumno(al);
 
         boolean descloqueoCuerpo = sharedPreferences.getBoolean("desbloquearCuerpo", false);
         boolean desbloqueoCosas = sharedPreferences.getBoolean("desbloquearCosas", false);

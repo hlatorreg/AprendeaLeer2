@@ -55,10 +55,10 @@ public class AlarmManager {
         Calendar c4 = Calendar.getInstance();
 
         //Cambiar el valor del segunto argumento para cambiar la fecha de la alarma
-        c1.set(Calendar.HOUR, c1.get(Calendar.HOUR) + 1);
-        c2.set(Calendar.HOUR, c2.get(Calendar.HOUR) + 2);
-        c3.set(Calendar.HOUR, c3.get(Calendar.HOUR) + 3);
-        c4.set(Calendar.HOUR, c4.get(Calendar.HOUR) + 4);
+        c1.set(Calendar.MINUTE, c1.get(Calendar.MINUTE) + 1);
+        c2.set(Calendar.MINUTE, c2.get(Calendar.MINUTE) + 2);
+        c3.set(Calendar.MINUTE, c3.get(Calendar.MINUTE) + 3);
+        c4.set(Calendar.MINUTE, c4.get(Calendar.MINUTE) + 4);
 
         Log.d(TAG, c1.toString());
         Log.d(TAG, c2.toString());

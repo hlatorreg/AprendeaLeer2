@@ -356,6 +356,7 @@ public class ModuloAccionesGame extends AppCompatActivity {
         crearAlarmasParaNotificaciones();
         sesionManager.aumentarSesiones();
         sesionManager.mostrarAlerta(alumno);
+        miDB.sumarSesiones(alumno);
     }
 
     private Runnable aVideo = new Runnable() {

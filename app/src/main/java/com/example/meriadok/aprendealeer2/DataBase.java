@@ -317,8 +317,20 @@ public class DataBase extends SQLiteOpenHelper {
         String query = "update " + NOMBRE_TABLA_TUTOR + " SET " + TUTOR_COL_1 + "='" + email + "'";
         Log.d(TAG, query);
         db.execSQL(query);
-        Log.d(TAG, "Email de tutor cambiado a " + email );
+        Log.d(TAG, "Email de tutor cambiado a " + email);
         db.close();
+    }
+
+    public boolean existeEmail(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "select * from " + NOMBRE_TABLA_TUTOR;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.getCount() <= 0){
+            cursor.close();
+            return false;
+        }
+        cursor.close();
+        return true;
     }
 
 }

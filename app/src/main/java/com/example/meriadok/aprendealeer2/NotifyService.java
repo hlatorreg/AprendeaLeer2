@@ -97,7 +97,7 @@ public class NotifyService extends Service {
                 break;
             case 4:
                 text = nombre + " lleva 24 Dias sin realizar la actividad " + actividad + ", favor resumir lo antes posible.";
-                emailNotificacion(al, miDB, actividad);
+                emailNotificacion(nombre, miDB, actividad);
                 break;
             default:
                 text = "Realizar ultima actividad.";
@@ -126,13 +126,13 @@ public class NotifyService extends Service {
         stopSelf();
     }
 
-    public void emailNotificacion(Alumno alumno, DataBase dataBase, String actividad){
+    public void emailNotificacion(String alumno, DataBase dataBase, String actividad){
         Mail mail = new Mail("titok23@gmail.com", "meriadoksink230023");
         String[] toArr = {dataBase.extraerEmail()};
         mail.setTo(toArr);
         mail.setFrom("aprendealeer@aal.cl");
         mail.setSubject("Notificación Aprende a Leer");
-        mail.setBody("Estimado usuario," + newline + " " + alumno.getNombre() + " no a realizado la actividad " + actividad + " en mas de 24 dias, se recomienza empezar lo antes posible desde el comienzo."
+        mail.setBody("Estimado usuario," + newline + " " + alumno + " no a realizado la actividad " + actividad + " en mas de 24 dias, se recomienza empezar lo antes posible desde el comienzo."
          + newline + newline + newline + "Este es un correo automatizado, favor no responder." + newline + "Para mas información consulte a hector.latorre23@gmail.com");
         try {
             mail.send();

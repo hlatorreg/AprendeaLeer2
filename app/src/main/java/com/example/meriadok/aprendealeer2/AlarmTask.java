@@ -57,8 +57,9 @@ public class AlarmTask implements Runnable {
         int rutAnumero = Integer.parseInt(partesNumericaRut);
         Log.d(TAG, "Parte numerica de rut es " + rutAnumero);
         id = id + rutAnumero;
-        Log.d(TAG, "La ID de la alarma es " + id);
+        Log.d(TAG, "La ID de la alarma es " + id + " y el rut asociado es " + rut);
         intent.putExtra("nombreAlumno", nombre);
+        Log.d(TAG, "Extra en el intent es : " + nombre);
         //La ID separa los intent, por lo que si se quiere mas notificaciones se le debe entregar un ID distinto a los demas intent
         PendingIntent pendingIntent = PendingIntent.getService(context, id, intent, 0);
 
@@ -79,7 +80,7 @@ public class AlarmTask implements Runnable {
         int rutAnumero = Integer.parseInt(partesNumericaRut);
         Log.d(TAG, "Parte numerica de rut es " + rutAnumero);
         id = id + rutAnumero;
-        Log.d(TAG, "La id a borrar es " + id);
+        Log.d(TAG, "La ID de la alarma es " + id + " y el rut asociado es " + rut);;
         PendingIntent pendingIntent = PendingIntent.getService(context, id, intent, 0);
         am.cancel(pendingIntent);
         pendingIntent.cancel();
